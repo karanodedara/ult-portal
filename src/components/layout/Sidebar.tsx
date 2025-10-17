@@ -6,7 +6,9 @@ import {
   Receipt,
   Settings,
   X,
-  Sparkles
+  Sparkles,
+  Users,
+  TrendingUp
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -25,6 +27,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'projects', label: 'Projects', icon: FolderOpen },
+    { id: 'clients', label: 'Clients', icon: Users },
+    { id: 'ulticus-leads', label: 'Ulticus Leads', icon: TrendingUp },
     { id: 'files', label: 'Files', icon: FileText },
     { id: 'invoices', label: 'Invoices', icon: Receipt },
     { id: 'settings', label: 'Settings', icon: Settings },
