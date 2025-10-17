@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import Dashboard from './components/pages/Dashboard';
@@ -9,11 +9,19 @@ import UlticusLeads from './components/pages/UlticusLeads';
 import Files from './components/pages/Files';
 import Invoices from './components/pages/Invoices';
 import Settings from './components/pages/Settings';
+import WelcomeOnboard from './components/pages/WelcomeOnboard';
 
 function App() {
   const [activeSection, setActiveSection] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path === '/welcome-onboard') {
+      setActiveSection('welcome-onboard');
+    }
+  }, []);
 
   const handleProjectSelect = (projectId: number) => {
     setSelectedProjectId(projectId);
@@ -27,6 +35,8 @@ function App() {
 
   const renderContent = () => {
     switch (activeSection) {
+      case 'welcome-onboard':
+        return <WelcomeOnboard />;
       case 'dashboard':
         return <Dashboard onNavigate={setActiveSection} />;
       case 'projects':
@@ -52,18 +62,22 @@ function App() {
     }
   };
 
+  if (activeSection === 'welcome-onboard') {
+    return <WelcomeOnboard />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50">
       <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
-      
+
       <div className="flex">
-        <Sidebar 
+        <Sidebar
           activeSection={activeSection}
           onSectionChange={setActiveSection}
           isOpen={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
         />
-        
+
         <main className="flex-1 lg:ml-72 pt-20">
           <div className="p-6 lg:p-10 gradient-mesh min-h-screen">
             {renderContent()}
