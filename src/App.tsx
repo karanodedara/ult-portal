@@ -4,6 +4,8 @@ import Sidebar from './components/layout/Sidebar';
 import Dashboard from './components/pages/Dashboard';
 import Projects from './components/pages/Projects';
 import ProjectDetails from './components/pages/ProjectDetails';
+import Clients from './components/pages/Clients';
+import UlticusLeads from './components/pages/UlticusLeads';
 import Files from './components/pages/Files';
 import Invoices from './components/pages/Invoices';
 import Settings from './components/pages/Settings';
@@ -35,6 +37,10 @@ function App() {
         ) : (
           <Projects onProjectSelect={handleProjectSelect} />
         );
+      case 'clients':
+        return <Clients />;
+      case 'ulticus-leads':
+        return <UlticusLeads />;
       case 'files':
         return <Files />;
       case 'invoices':
